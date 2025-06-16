@@ -18,7 +18,11 @@ jobs:
       - name: Run Semgrep with full output
         uses: returntocorp/semgrep-action@v1
         with:
-          config: p/golang,p/security-audit,p/owasp-top-ten,p/cwe-top-25
+          config: |
+            p/golang
+            p/security-audit
+            p/owasp-top-ten
+            p/cwe-top-25
           generateSarif: true
           uploadSarif: true
           comment: true
