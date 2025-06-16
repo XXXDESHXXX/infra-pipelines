@@ -19,18 +19,15 @@ jobs:
         with:
           go-version: ${{ inputs.go-version }}
 
+      - name: Install Gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@v2.19.0
+
       - name: Download dependencies
         run: go mod download
 
-      - name: Run Gosec and generate JSON report
-        uses: securego/gosec@master
-        with:
-          args: '-fmt=json -out=gosec-report.json ./... -severity high -confidence high'
-
-      - name: Check report file
+      - name: Run Gosec and generate JSON report (non-blocking)
         run: |
-          ls -l gosec-report.json
-          cat gosec-report.json
+          gosec -fmt=json -out=gosec-report.json -severity high -confidence high ./...
 
       - name: Upload Gosec report
         uses: actions/upload-artifact@v4
