@@ -22,7 +22,13 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
-      - name: Run Gosec Security Scanner
+      - name: Run Gosec and generate JSON report
         uses: securego/gosec@master
         with:
-          args: ./...
+          args: '-fmt=json -out=reports/gosec-report.json ./...'
+
+      - name: Upload Gosec report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gosec-report
+          path: reports/gosec-report.json
