@@ -1,0 +1,29 @@
+name: Gosec
+
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        required: false
+        type: string
+        default: '1.24'
+
+jobs:
+  gosec:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ inputs.go-version }}
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@2.22.5
+
+      - name: Run gosec
+        run: gosec -severity medium -confidence medium ./...
