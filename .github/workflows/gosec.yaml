@@ -26,7 +26,6 @@ jobs:
         uses: securego/gosec@master
         with:
           args: '-fmt=json -out=gosec-report.json ./...'
-        continue-on-error: true
 
       - name: Check report file
         run: |
