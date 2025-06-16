@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Semgrep with full output
+      - name: Run Semgrep with SARIF report
         uses: returntocorp/semgrep-action@v1
         with:
           config: |
