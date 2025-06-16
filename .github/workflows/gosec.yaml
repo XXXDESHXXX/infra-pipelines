@@ -26,7 +26,7 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
-      - name: Run Gosec and generate report
+      - name: Run Gosec and generate SARIF report
         uses: securego/gosec@master
         with:
           args: '-no-fail -fmt=sarif -out=results.sarif ./...'

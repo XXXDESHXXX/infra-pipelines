@@ -7,10 +7,18 @@ jobs:
   semgrep:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Semgrep
+      - name: Run Semgrep with full output
         uses: returntocorp/semgrep-action@v1
         with:
-          config: "p/owasp-go"
+          config: p/golang,p/security-audit,p/owasp-top-ten,p/cwe-top-25
+          generateSarif: true
+          uploadSarif: true
+          comment: true
