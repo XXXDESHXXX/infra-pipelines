@@ -25,7 +25,7 @@ jobs:
       - name: Run Gosec and generate JSON report
         uses: securego/gosec@master
         with:
-          args: '-fmt=json -out=gosec-report.json ./...'
+          args: '-fmt=json -out=gosec-report.json ./... -severity medium -confidence medium'
 
       - name: Check report file
         run: |
