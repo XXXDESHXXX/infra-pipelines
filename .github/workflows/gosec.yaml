@@ -22,10 +22,11 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
+      - name: Build project
+        run: go build ./...
+
       - name: Install gosec
         run: go install github.com/securego/gosec/v2/cmd/gosec@v2.18.2
 
       - name: Run gosec
-        run: gosec -severity medium -confidence medium -exclude-dir=internal/bootstrap \
-          -exclude-dir=internal/config \
-          ./...
+        run: gosec -severity medium -confidence medium ./...
