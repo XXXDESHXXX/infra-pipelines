@@ -12,6 +12,10 @@ jobs:
   gosec:
     runs-on: ubuntu-latest
 
+  permissions:
+    contents: read
+    security-events: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -22,7 +26,7 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
-      - name: Run Gosec and generate JSON report
+      - name: Run Gosec and generate report
         uses: securego/gosec@master
         with:
           args: '-no-fail -fmt=sarif -out=results.sarif ./...'
